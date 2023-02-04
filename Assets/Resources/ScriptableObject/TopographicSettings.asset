@@ -12,3 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd5109c63da784b46af903465cb22a52, type: 3}
   m_Name: TopographicSettings
   m_EditorClassIdentifier: 
+  animationRate: 5
+  topographicNoise:
+    enabled: 1
+    noiseScale: 0.24
+    octaves: 3
+    persistance: 0.339
+    lacunarity: 11.3
+    heightScalar: 0.4

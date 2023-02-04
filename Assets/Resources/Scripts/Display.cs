@@ -35,4 +35,9 @@ public class Display : MonoBehaviour
     protected virtual void UpdateMaterial(){
         Init();
     }
+
+    private void Update()
+    {
+        UpdateMaterial();
+    }
 }
