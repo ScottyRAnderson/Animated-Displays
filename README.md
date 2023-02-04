@@ -1,2 +1,2 @@
 # Animated-Displays
-A small collection of Animated Displays
+Collection of animated displays used as backgrounds and for videos.
