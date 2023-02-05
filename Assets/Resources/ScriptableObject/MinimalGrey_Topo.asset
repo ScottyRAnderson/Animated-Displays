@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5109c63da784b46af903465cb22a52, type: 3}
+  m_Name: MinimalGrey_Topo
+  m_EditorClassIdentifier: 
+  numContours: 4
+  contourWidth: 0.04
+  contourSpacing: 0.09
+  animationRate: 5
+  contourColor: {r: 0.882353, g: 0.79215693, b: 0.6627451, a: 1}
+  mainColor: {r: 0.10980393, g: 0.121568635, b: 0.15686275, a: 1}
+  capColor: {r: 0.6603774, g: 0.23985404, b: 0.2505001, a: 1}
+  capHeight: 0.595
+  noiseColor: 0.02
+  debugNoise: 0
+  topographicNoise:
+    enabled: 1
+    noiseScale: 6.81
+    octaves: 3
+    persistance: 1
+    lacunarity: 1.52
+    heightScalar: 1.2

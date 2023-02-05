@@ -1,7 +1,6 @@
 #ifndef NOISE_SIMPLEX_FUNC
 #define NOISE_SIMPLEX_FUNC
 /*
-
 Description:
     Array- and textureless CgFx/HLSL 2D, 3D and 4D simplex noise functions.
     a.k.a. simplified and optimized Perlin noise.
@@ -435,19 +434,18 @@ float snoise(float4 v)
 
 
 
-//                 Credits from source glsl file:
+// Credits from source glsl file:
 //
-// Description : Array and textureless GLSL 2D/3D/4D simplex
-//               noise functions.
-//      Author : Ian McEwan, Ashima Arts.
-//  Maintainer : ijm
-//     Lastmod : 20110822 (ijm)
-//     License : Copyright (C) 2011 Ashima Arts. All rights reserved.
-//               Distributed under the MIT License. See LICENSE file.
-//               https://github.com/ashima/webgl-noise
+// Description : Array and textureless GLSL 2D/3D/4D simplex noise functions.
+// Author : Ian McEwan, Ashima Arts.
+// Maintainer : ijm
+// Lastmod : 20110822 (ijm)
+// License : Copyright (C) 2011 Ashima Arts. All rights reserved.
+// Distributed under the MIT License. See LICENSE file.
+// https://github.com/ashima/webgl-noise
 //
 //
-//           The text from LICENSE file:
+// The text from LICENSE file:
 //
 //
 // Copyright (C) 2011 by Ashima Arts (Simplex noise)

@@ -17,9 +17,8 @@ Shader "Custom/Topographic"
             #pragma shader_feature DEBUGNOISE
 
             #include "UnityCG.cginc"
+            #include "./Includes/Math.cginc"
             #include "./Includes/NoiseHelper.cginc"
-            #include "Packages/jp.keijiro.noiseshader/Shader/ClassicNoise2D.hlsl"
-            #include "Packages/jp.keijiro.noiseshader/Shader/SimplexNoise2D.hlsl"
 
             struct appdata
             {
@@ -43,21 +42,13 @@ Shader "Custom/Topographic"
             float4 _MainColor;
             float4 _CapColor;
             float _CapHeight;
+            float _NoiseColor;
 
-            float _HeightBias;
             float _NoiseScale;
             int _Octaves;
             float _Persistance;
             float _Lacunarity;
             float _HeightScalar;
-
-            float bias(float x, float bias)
-            {
-                // Adjust input to make control feel more linear
-                float k = pow(1 - bias, 3);
-                // Equation based on: shadertoy.com/view/Xd2yRd
-                return (x * k) / (x * k - x + 1);
-            }
 
             float evaluateNoise(float3 p)
             {
@@ -82,7 +73,6 @@ Shader "Custom/Topographic"
                     contribution /= 2.0f;
                 }
 
-                //perlinValue = bias(perlinValue, _HeightBias);
                 perlinValue *= _HeightScalar;
                 return perlinValue;
             }
@@ -130,15 +120,13 @@ Shader "Custom/Topographic"
                 float contourValue = calculateContours(perlinValue);
 
                 float4 backgroundCol = _MainColor;
-                if (1 - perlinValue > _CapHeight){
+                if (1 - perlinValue >= _CapHeight){
                     backgroundCol = _CapColor;
                 }
-
+                else{
+                    backgroundCol += lerp(0, 1, perlinValue* _NoiseColor);
+                }
                 float4 finalCol = lerp(backgroundCol, _ContourColor, contourValue);
-
-                float baseHeight = 1 - ((_NumContours * _ContourWidth) + (_NumContours * _ContourSpacing));
-                finalCol += lerp(0, 1, perlinValue * _ContourColor.a);
-
                 return finalCol;
             }
             ENDCG

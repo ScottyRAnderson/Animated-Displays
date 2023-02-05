@@ -24,13 +24,13 @@ public class TopographicSettings : ScriptableObject
     private Color capColor;
     [SerializeField][Range(0f, 1f)]
     private float capHeight = 0.5f;
+    [SerializeField][Range(0f, 1f)]
+    private float noiseColor = 0f;
 
     [Space]
 
     [SerializeField]
     private bool debugNoise;
-    [SerializeField][Range(0f, 1f)]
-    private float heightBias = 1f;
     [SerializeField]
     private NoiseLayer topographicNoise;
 
@@ -42,8 +42,8 @@ public class TopographicSettings : ScriptableObject
     public Color MainColor { get { return mainColor; } }
     public Color CapColor { get { return capColor; } }
     public float CapHeight { get { return capHeight; } }
+    public float NoiseColor { get { return noiseColor; } }
     public bool DebugNoise { get { return debugNoise; } }
-    public float HeightBias { get { return heightBias; } }
     public NoiseLayer TopographicNoise { get { return topographicNoise; } }
 
     private void OnValidate()
