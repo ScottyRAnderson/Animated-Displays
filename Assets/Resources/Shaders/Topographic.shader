@@ -17,6 +17,7 @@ Shader "Custom/Topographic"
             #pragma shader_feature DEBUGNOISE
 
             #include "UnityCG.cginc"
+            #include "./Includes/NoiseHelper.cginc"
             #include "Packages/jp.keijiro.noiseshader/Shader/ClassicNoise2D.hlsl"
             #include "Packages/jp.keijiro.noiseshader/Shader/SimplexNoise2D.hlsl"
 
@@ -38,6 +39,11 @@ Shader "Custom/Topographic"
             float _ContourSpacing;
             float _AnimRate;
 
+            float4 _ContourColor;
+            float4 _MainColor;
+            float4 _CapColor;
+            float _CapHeight;
+
             float _HeightBias;
             float _NoiseScale;
             int _Octaves;
@@ -53,22 +59,22 @@ Shader "Custom/Topographic"
                 return (x * k) / (x * k - x + 1);
             }
 
-            float evaluateNoise(float2 p, float offset)
+            float evaluateNoise(float3 p)
             {
                 float perlinValue = 0;
                 float amplitude = 1;
                 float frequency = 1;
                 float contribution = 1;
 
-                p += offset * _AnimRate;
+                float offset = _Time.x * _AnimRate;
 
                 // Loop through each octave and contribute
                 for (int o = 0; o < _Octaves; o++)
                 {
-                    float2 offsetSample = p / _NoiseScale * frequency;
-                    //offsetSample += _Time.x * _AnimRate;
+                    float3 offsetSample = p / _NoiseScale * frequency;
+                    //offset += _Time.x * _AnimRate;
 
-                    float noiseValue = (SimplexNoise(offsetSample) + 0.5f) * contribution;
+                    float noiseValue = (snoise(float4(offsetSample, offset)) + 0.5f) * contribution;
                     perlinValue += noiseValue * amplitude;
 
                     amplitude *= _Persistance;
@@ -76,8 +82,8 @@ Shader "Custom/Topographic"
                     contribution /= 2.0f;
                 }
 
+                //perlinValue = bias(perlinValue, _HeightBias);
                 perlinValue *= _HeightScalar;
-                perlinValue = bias(perlinValue, _HeightBias);
                 return perlinValue;
             }
 
@@ -116,15 +122,24 @@ Shader "Custom/Topographic"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                float offset = evaluateNoise(i.uv, _Time.x);
-
-                float perlinValue = evaluateNoise(i.uv, offset);
+                float perlinValue = evaluateNoise(i.worldPos);
                 #if DEBUGNOISE
-                return perlinValue;
+                return 1 - perlinValue;
                 #endif
 
                 float contourValue = calculateContours(perlinValue);
-                return contourValue;
+
+                float4 backgroundCol = _MainColor;
+                if (1 - perlinValue > _CapHeight){
+                    backgroundCol = _CapColor;
+                }
+
+                float4 finalCol = lerp(backgroundCol, _ContourColor, contourValue);
+
+                float baseHeight = 1 - ((_NumContours * _ContourWidth) + (_NumContours * _ContourSpacing));
+                finalCol += lerp(0, 1, perlinValue * _ContourColor.a);
+
+                return finalCol;
             }
             ENDCG
         }

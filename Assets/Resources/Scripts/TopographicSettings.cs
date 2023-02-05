@@ -17,6 +17,17 @@ public class TopographicSettings : ScriptableObject
     [Space]
 
     [SerializeField]
+    private Color contourColor;
+    [SerializeField]
+    private Color mainColor;
+    [SerializeField]
+    private Color capColor;
+    [SerializeField][Range(0f, 1f)]
+    private float capHeight = 0.5f;
+
+    [Space]
+
+    [SerializeField]
     private bool debugNoise;
     [SerializeField][Range(0f, 1f)]
     private float heightBias = 1f;
@@ -27,6 +38,10 @@ public class TopographicSettings : ScriptableObject
     public float ContourWidth { get { return contourWidth; } }
     public float ContourSpacing { get { return contourSpacing; } }
     public float AnimationRate { get { return animationRate; } }
+    public Color ContourColor { get { return contourColor; } }
+    public Color MainColor { get { return mainColor; } }
+    public Color CapColor { get { return capColor; } }
+    public float CapHeight { get { return capHeight; } }
     public bool DebugNoise { get { return debugNoise; } }
     public float HeightBias { get { return heightBias; } }
     public NoiseLayer TopographicNoise { get { return topographicNoise; } }

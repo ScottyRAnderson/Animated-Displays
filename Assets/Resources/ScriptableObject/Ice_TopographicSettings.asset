@@ -10,18 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd5109c63da784b46af903465cb22a52, type: 3}
-  m_Name: TopographicSettings 1
+  m_Name: Ice_TopographicSettings
   m_EditorClassIdentifier: 
-  numContours: 6
-  contourWidth: 0.005
-  contourSpacing: 0.1
-  animationRate: 3
+  numContours: 20
+  contourWidth: 0.06
+  contourSpacing: 0.09
+  animationRate: 5
+  contourColor: {r: 0.38431376, g: 0.6784314, b: 0.6392157, a: 0.07058824}
+  mainColor: {r: 0.011764706, g: 0.52156866, b: 0.54509807, a: 1}
+  capColor: {r: 0.9529412, g: 0.9254902, b: 0.8117647, a: 1}
+  capHeight: 0.5
   debugNoise: 0
-  heightBias: 0.27
+  heightBias: 0
   topographicNoise:
     enabled: 1
-    noiseScale: 0.49
+    noiseScale: 6.81
     octaves: 3
-    persistance: 0.637
-    lacunarity: 1.38
-    heightScalar: 0.56
+    persistance: 1
+    lacunarity: 1.52
+    heightScalar: 1.2

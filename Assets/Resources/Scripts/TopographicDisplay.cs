@@ -21,7 +21,12 @@ public class TopographicDisplay : Display
         material.SetFloat("_ContourSpacing", settings.ContourSpacing);
         material.SetFloat("_AnimRate", settings.AnimationRate);
 
-        if(settings.DebugNoise){
+        material.SetColor("_ContourColor", settings.ContourColor);
+        material.SetColor("_MainColor", settings.MainColor);
+        material.SetColor("_CapColor", settings.CapColor);
+        material.SetFloat("_CapHeight", settings.CapHeight);
+
+        if (settings.DebugNoise){
             material.EnableKeyword("DEBUGNOISE");
         }
         else{
